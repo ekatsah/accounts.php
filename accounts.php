@@ -106,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['action']) &&
             body {
                 margin: 10px;
                 padding: 0px;
-                font-family: verdana;
+                font-family: arial, verdana;
                 font-size: 10px;
             }
             
