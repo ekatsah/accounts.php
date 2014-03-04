@@ -277,7 +277,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['action']) &&
                 {{#if add}}
                 <tr id="more_tr">
                     <td colspan="7" class="more">
-                        More
+                        <button>Add</button>
                         <select id="passphrase">
                             {{#each passphrases }}
                             <option value="{{ this.id }}">{{ this.letter }}..</option>
