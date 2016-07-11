@@ -17,9 +17,9 @@ require_once 'google-api-php-client-2.0.1/vendor/autoload.php';
 session_start();
 
 // Google client id, secre - https://console.developers.google.com
-$client_id = '{% googlee_id %}';
-$client_secret = '{% google_secret %}';
-$redirect_uri = '{% google_redirect_url %}';
+$client_id = '<googlee_id>';
+$client_secret = '<google_secret>';
+$redirect_uri = '<google_redirect_url>';
 
 
 $client = new Google_Client();
