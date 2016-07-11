@@ -1,4 +1,4 @@
-<?
+<?php
 /* Copyright 2012 Steak
  * 
  * This file is under the BeerWare License (rev. 42)
@@ -295,9 +295,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['action']) &&
                     _.bindAll(this, 'render', 'add', 'edit', 'put', 'change',
                               'unlock', 'lock', 'rpw', 'get_pass', 'show');
                     this.passphrases = [];
-                    this.magic = '<? echo $magic_key ?>'; 
+                    this.magic = '<?php echo $magic_key ?>'; 
                     this.records = new Backbone.Collection();
-                    this.records.url = '<? echo $url ?>';
+                    this.records.url = '<?php echo $url ?>';
                     this.records.on("reset add sync change:edit", this.render);
                     this.records.fetch();
                     this.password = "---";
@@ -344,7 +344,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['action']) &&
                         "passphrase": pp.id,
                         "magic": Aes.Ctr.encrypt(this.magic, pp.pwd, 256),
                     });
-                    record.url = '<? echo $url ?>';
+                    record.url = '<?php echo $url ?>';
                     this.records.add(record);
                     return false;
                 },
@@ -468,4 +468,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['action']) &&
     <body>Suddenly, zoidberg!</body>
 </html>
 
-<? } ?>
+<?php } ?>
