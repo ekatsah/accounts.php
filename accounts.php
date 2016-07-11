@@ -12,6 +12,50 @@
  * 
  */
 
+require_once 'google-api-php-client-2.0.1/vendor/autoload.php';
+
+session_start();
+
+// Google client id, secre - https://console.developers.google.com
+$client_id = '{% googlee_id %}';
+$client_secret = '{% google_secret %}';
+$redirect_uri = '{% google_redirect_url %}';
+
+
+$client = new Google_Client();
+$client->setClientId($client_id);
+$client->setClientSecret($client_secret);
+$client->setRedirectUri($redirect_uri);
+$client->addScope("email");
+$client->addScope("profile");
+
+
+$service = new Google_Service_Oauth2($client);
+
+// If $_GET['code'] is empty, redirect user to google authentication page for code. 
+// Code is required to get token from google and put it in session variable
+if (isset($_GET['code'])) {
+  $client->authenticate($_GET['code']);
+  $_SESSION['access_token'] = $client->getAccessToken();
+  header('Location: ' . filter_var($redirect_uri, FILTER_SANITIZE_URL));
+  exit;
+}
+
+// If user has an access_token continue, else get login URL for user 
+if (isset($_SESSION['access_token']) && $_SESSION['access_token']) {
+  $client->setAccessToken($_SESSION['access_token']);
+} else {
+  $authUrl = $client->createAuthUrl();
+}
+
+if (isset($authUrl)){
+    // Show google sign in button
+    echo '<div style="margin:20px">';
+    echo '<div align="center">';
+    echo '<a class="login" href="' . $authUrl . '"><img src="btn_google.png" /></a>';
+    echo '</div></div>';
+}
+
 $magic_key = "nonpsychologic introspectives!";
 $url = "/accounts.php";
 
